@@ -7,6 +7,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -274,7 +275,7 @@ public class MainFragment extends Fragment {
     }
     private ArrayList<Song> addSongToList(File song,ArrayList<Song
             > songList) {
-        if (song.getName().endsWith(".mp3")) {
+        if (song.getName().endsWith(".mp3") && song.length()/1000000>=4) {
             String s= song.getName();
             if(s.length()>30)
             {
@@ -313,7 +314,9 @@ public class MainFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
              if(myDatabase.isEmpty()) {
-                 myList = GetFiles(new File("/storage/sdcard1"));
+                // Log.d("Path",Environment.getRootDirectory().getAbsolutePath().toString());
+                // Log.d("Path",Environment.get);
+                 myList = GetFiles(new File("/storage/9016-4EF8"));
                  myDatabase.insertValue(myList);
              }
              else
